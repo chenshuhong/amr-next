@@ -1,6 +1,9 @@
 const path = require('path')
 const withLess = require('@zeit/next-less')
 module.exports = withLess({
+  lessLoaderOptions: {
+    javascriptEnabled: true,
+  },
   cssModules: true,
   cssLoaderOptions: {
     importLoaders: 2,
@@ -9,7 +12,7 @@ module.exports = withLess({
   webpack: (config, { buildId, dev, isServer, defaultLoaders }) => {
     // Perform customizations to webpack config
     // Important: return the modified config
-    
+
     console.log(config.module.rules,defaultLoaders)
     // 目录别名配置
     Object.assign(config.resolve.alias,{
