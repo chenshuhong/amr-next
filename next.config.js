@@ -1,6 +1,6 @@
 const path = require('path')
-const withLess = require('@zeit/next-less')
-module.exports = withLess({
+const antdLessLoader = require("next-antd-aza-less")
+module.exports = antdLessLoader({
   lessLoaderOptions: {
     javascriptEnabled: true,
   },
@@ -13,11 +13,30 @@ module.exports = withLess({
     // Perform customizations to webpack config
     // Important: return the modified config
 
-    console.log(config.module.rules,defaultLoaders)
     // 目录别名配置
-    Object.assign(config.resolve.alias,{
+    Object.assign(config.resolve.alias, {
       'components': path.join(__dirname, 'components'),
     })
+    if (isServer) {
+      const antStyles = /antd\/.*?\/style.*?/
+      const origExternals = [...config.externals]
+      config.externals = [
+        (context, request, callback) => {
+          if (request.match(antStyles)) return callback()
+          if (typeof origExternals[0] === 'function') {
+            origExternals[0](context, request, callback)
+          } else {
+            callback()
+          }
+        },
+        ...(typeof origExternals[0] === 'function' ? [] : origExternals),
+      ]
+
+      config.module.rules.unshift({
+        test: antStyles,
+        use: 'null-loader',
+      })
+    }
     return config
   },
 })
