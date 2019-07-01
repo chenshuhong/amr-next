@@ -8,8 +8,8 @@ import style from './index.less'
 export default class AppFooter extends React.Component{
   render(){
     return (
-      <div>
-        我是尾部
+      <div className='tac'>
+      
       </div>
     )
   }

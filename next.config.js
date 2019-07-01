@@ -1,8 +1,17 @@
+const fs = require('fs')
 const path = require('path')
 const antdLessLoader = require("next-antd-aza-less")
+const lessToJS = require('less-vars-to-js')
+
+// Where your antd-custom.less file lives
+const modifyVars = lessToJS(
+  fs.readFileSync(path.resolve(__dirname, './theme.less'), 'utf8')
+)
+
 module.exports = antdLessLoader({
   lessLoaderOptions: {
     javascriptEnabled: true,
+    modifyVars
   },
   cssModules: true,
   cssLoaderOptions: {

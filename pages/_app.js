@@ -7,7 +7,7 @@ import React from 'react'
 import Head from 'next/head'
 import AppHeader from 'components/AppHeader'
 import AppFooter from 'components/AppFooter'
-//import 'normalize.css'
+import './common.less'
 import { Layout } from 'antd';
 
 const {Header, Content, Footer} = Layout;
