@@ -9,7 +9,7 @@ export default class AppFooter extends React.Component{
   render(){
     return (
       <div className='tac'>
-      
+        Ant Design + Next + Mobx ©2018 Created by baiye
       </div>
     )
   }
