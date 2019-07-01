@@ -21,7 +21,7 @@ module.exports = antdLessLoader({
   webpack: (config, { buildId, dev, isServer, defaultLoaders }) => {
     // Perform customizations to webpack config
     // Important: return the modified config
-
+    console.log(config.plugins)
     // 目录别名配置
     Object.assign(config.resolve.alias, {
       'components': path.join(__dirname, 'components'),

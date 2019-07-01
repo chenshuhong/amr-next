@@ -9,6 +9,11 @@ import AppHeader from 'components/AppHeader'
 import AppFooter from 'components/AppFooter'
 import './common.less'
 import { Layout } from 'antd';
+import { configure } from "mobx";
+
+configure({
+  enforceActions:'always'
+});
 
 const {Header, Content, Footer} = Layout;
 
