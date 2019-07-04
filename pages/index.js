@@ -11,9 +11,7 @@ export default class extends React.Component{
   render(){
     return (
       <div className='example'>
-        <Link href="/hello">
-          <a>go to hello</a>
-        </Link>
+        首页
       </div>
     )
   }
