@@ -24,7 +24,7 @@ export default class extends React.Component{
 
   render(){
     let params = {
-      api_url: `list`,
+      url: `category2`,
       method: 'GET',
       columns:this.columns
   }

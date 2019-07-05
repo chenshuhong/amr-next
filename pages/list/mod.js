@@ -16,7 +16,6 @@ class Mod {
     let list = await getList({
       url:"index"
     })
-    console.log(list)
     runInAction(()=> {
       this.state.list = list||[];
     })

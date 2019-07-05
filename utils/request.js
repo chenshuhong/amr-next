@@ -13,27 +13,45 @@ function getResultUrl(url,version='v1'){
 }
 
 export default function request(options){
+  let result
   if(!options || !options.url){
-    notification.open({
-      message: '无效的url',
-      description: '请求选项中的url是无效的',
-    });
-    return Promise.reject({resultCode: 1, resultMsg: '无效的url：' + options.url, data: null})
+    result = Promise.resolve({code: 1, msg: '无效的url：' + options.url, data: null})
   }
   const {method = 'get', data, url,version} = options
   let resultUrl = getResultUrl(url,version);
   switch (method.toLowerCase()) {
     case 'get':
-      return axios.get(resultUrl,{
+      result = axios.get(resultUrl,{
         params:data
       })
+      break
     case 'post':
-      return axios.post(resultUrl,data)
+      result =  axios.post(resultUrl,data)
+      break
     case 'put':
-      return axios.put(resultUrl,data)
+      result = axios.put(resultUrl,data)
+      break
     case 'delete':
-      return axios.delete(resultUrl)
+      result = axios.delete(resultUrl)
+      break
     default:
-      return Promise.reject({resultCode: 1, resultMsg: '不支持的请求方式' + method, data: null})
+      result = Promise.resolve({code: 1, msg: '不支持的请求方式' + method, data: null})
+      break
   }
+  return result.then(({data:axiosData})=>{
+    let {code,msg,data} = axiosData
+    if (code === 0){
+      return data
+    } else {
+      notification.open({
+        message: msg,
+      });
+    }
+  }).catch(err=>{
+    debugger
+    notification.open({
+      message: err.message,
+    });
+  })
 }
+

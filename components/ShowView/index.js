@@ -14,7 +14,6 @@ class ShowView extends React.Component{
     this.state={
       dataSource:[],
       loading:false,
-      
     }
   }
   
@@ -22,8 +21,18 @@ class ShowView extends React.Component{
     this.getDataSource()
   }
   
-  getDataSource = ()=>{
-  
+  getDataSource = async ()=>{
+    this.setState({
+      loading:true
+    })
+    let data = await request({
+      url:this.props.url,
+      version:this.props.version,
+    })
+    this.setState({
+      dataSource:data||[],
+      loading:false
+    })
   }
   
   render(){
@@ -32,6 +41,7 @@ class ShowView extends React.Component{
     columns.push({
       title:'序号',
       dtaIndex:'tableIndex',
+      key:'tableIndex',
       width:65,
       render:(key,item,index)=>(index+1)
     })
@@ -43,7 +53,7 @@ class ShowView extends React.Component{
           loading={state.loading}
           dataSource={state.dataSource}
           columns={columns}
-          rowKey={this.props.rowKey}/>
+          rowKey={this.props.rowKey||'id'}/>
       </div>
     )
   }
