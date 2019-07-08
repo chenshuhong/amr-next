@@ -23,6 +23,11 @@ export default class AppHeader extends React.Component{
               <a>列表页</a>
             </Link>
           </Menu.Item>
+          <Menu.Item key="2">
+            <Link href="/todo">
+              <a>todo</a>
+            </Link>
+          </Menu.Item>
         </Menu>
       </div>
     )

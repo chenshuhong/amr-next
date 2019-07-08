@@ -48,7 +48,6 @@ export default function request(options){
       });
     }
   }).catch(err=>{
-    debugger
     notification.open({
       message: err.message,
     });

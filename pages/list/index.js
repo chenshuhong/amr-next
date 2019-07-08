@@ -21,12 +21,21 @@ export default class extends React.Component{
       dataIndex: 'name',
     },
   ]
+  
+  querys = [
+    {
+      label:'名称',
+      key:'name',
+      type:'input',
+    }
+  ]
 
   render(){
     let params = {
-      url: `category2`,
+      url: `category`,
       method: 'GET',
-      columns:this.columns
+      columns:this.columns,
+      querys:this.querys
   }
     return (
       <div className='pd2'>

@@ -31,7 +31,7 @@ module.exports = antdLessLoader({
     
     //antd 样式设置
     if (isServer) {
-      const antStyles = /antd\/.*?\/style.*?/
+      const antStyles = /(antd\/.*?\/style.*?)/
       const origExternals = [...config.externals]
       config.externals = [
         (context, request, callback) => {
